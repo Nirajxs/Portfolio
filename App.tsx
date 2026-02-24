@@ -554,7 +554,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="flex items-center gap-6 flex-wrap">
           <button onClick={handleHomeClick} className={`flex items-center gap-2 font-black text-[10px] uppercase tracking-widest transition-all hover:text-purple-500 ${!isDashboardMode ? 'text-purple-500' : 'opacity-40 hover:opacity-100'}`}>
             <Home size={14} /> Home
           </button>
