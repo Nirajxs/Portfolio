@@ -139,7 +139,9 @@ const ContactForm: React.FC<{
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [viewMode, setViewMode] = useState<'home' | 'dashboard'>('home');
+  const [viewMode, setViewMode] = useState<'home' | 'dashboard'>(
+  window.innerWidth < 768 ? 'dashboard' : 'home'
+);
   const [activeSubSection, setActiveSubSection] = useState<SectionId | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -536,7 +538,7 @@ const App: React.FC = () => {
   const isDashboardMode = viewMode === 'dashboard';
 
   return (
-    <div className={`h-screen flex flex-col ${isDark ? 'bg-[#020617] text-white' : 'bg-gray-50 text-gray-900'} font-['Inter'] transition-colors duration-700`}>
+    <div className={`min-h-screen flex flex-col ${isDark ? 'bg-[#020617] text-white' : 'bg-gray-50 text-gray-900'} font-['Inter'] transition-colors duration-700`}>
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className={`absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-purple-900/10 blur-[180px] rounded-full transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
         <div className={`absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-900/10 blur-[180px] rounded-full transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
@@ -583,11 +585,11 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      <main className={`flex-1 pt-20 relative overflow-hidden flex flex-col md:flex-row`}>
+      <main className={`flex-1 pt-20 relative flex flex-col md:flex-row`}>
         {!isDashboardMode ? (
           /* HOME SCREEN */
           <div className="w-full h-full overflow-y-auto custom-scrollbar scroll-smooth">
-            <div className="min-h-full flex flex-col md:flex-row items-center justify-center px-6 md:px-20 lg:px-32 py-10 gap-10 md:gap-16 animate-in fade-in duration-1000">
+           <div className="hidden md:flex min-h-full flex-col md:flex-row items-center justify-center px-6 md:px-20 lg:px-32 py-10 gap-10 md:gap-16 animate-in fade-in duration-1000">
               
               {/* Left Column: Avatar & Main Intro */}
               <div className="w-full md:w-5/12 flex flex-col items-center md:items-start text-center md:text-left">
